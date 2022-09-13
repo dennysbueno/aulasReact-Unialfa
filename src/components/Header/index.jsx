@@ -1,7 +1,7 @@
 import React from "react";
 import "./styles.css"
 
-export const Header = () => {
+export const Header = (props) => {
   return(
     <header
       style={{
@@ -9,7 +9,7 @@ export const Header = () => {
       }}
     >
       <div className="divHeader">
-        <h1>Cinema em casa</h1>
+        <h1>{props.nomeSite}</h1>
       </div>
     </header>
   )

@@ -1,6 +1,6 @@
 import React from "react";
 
-export const Footer = () => {
+export const Footer = (props) => {
   return (
     <footer
       style={{
@@ -13,7 +13,7 @@ export const Footer = () => {
         alignItems: "center",
       }}
     >
-      <p>Desenvolvido por Dennys Bueno</p>
+      <p>{props.titulo}</p>
     </footer>
   );
 };

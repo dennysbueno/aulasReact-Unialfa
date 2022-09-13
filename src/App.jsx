@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 import { Card } from "./components/Card";
 import { Footer } from "./components/Footer";
 import { Header } from "./components/Header";
@@ -16,35 +17,48 @@ const requisicao = [
   {
     "id": 1,
     "titulo": 'Trem Bala',
-    "img": card1
+    "imagem": card1
   },
   {
     "id": 2,
     "titulo": 'Thor',
-    "img": card2
+    "imagem": card2
   },
   {
     "id": 3,
     "titulo": 'Ooops!',
-    "img": card3
+    "imagem": card3
   },
   {
     "id": 4,
     "titulo": 'Top Gun Maverick',
-    "img": card4
+    "imagem": card4
   },
 ]
 
 function App() {
 
   const [cards, setCards] = useState(requisicao)
+  const [qualquerNome, setQualquerNome] = useState('Categorias')
+  const [nomeSite, setNomeSite] = useState('Cinema em casa')
 
+  function alterarInterface() {
+    setQualquerNome('Filmes')
+    setNomeSite('Cinema Shopping Palladium Umuarama')
+    axios.get('https://back-filmes.herokuapp.com/filmes')
+      .then((resposta) => {
+        console.log(resposta.data)
+        setCards(resposta.data)
+      })
+  }
   return (
     <>
-      <Header />
+      <Header 
+        nomeSite={nomeSite}
+      />
+      <button onClick={alterarInterface}>Alterar Interface</button>
       <img width="100%" src={banner} alt="Sala de Cinema" />
-
-      <h2>Filmes</h2>
+      <h2>{qualquerNome}</h2>
 
       <div
         style={{
@@ -60,7 +74,7 @@ function App() {
               <Card
                 key={element.id}
                 titulo={element.titulo}
-                img={element.img}
+                img={element.imagem}
               />
             )
           })
@@ -68,7 +82,9 @@ function App() {
         
       </div>
 
-      <Footer />
+      <Footer 
+        titulo={"Desenvolvido por Dennys Bueno"}
+      />
     </>
   );
 }
